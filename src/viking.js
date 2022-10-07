@@ -56,8 +56,8 @@ class War {
     addSaxon(saxon) {
         this.saxonArmy.push(saxon);
     }
-
-    vikingAttack() {
+armyAttack(army) {
+        if (army === "viking") {
         const attacker = Math.floor(Math.random()) * this.vikingArmy.length;
         const attacked = Math.floor(Math.random()) * this.saxonArmy.length;
         const damage = this.vikingArmy[attacker].attack();
@@ -66,9 +66,7 @@ class War {
             this.saxonArmy.splice(attacked,1);
         }
        return result;
-    }
-
-    saxonAttack() {
+        } else if (army === "saxon") {
         const attacker = Math.floor(Math.random()) * this.saxonArmy.length;
         const attacked = Math.floor(Math.random()) * this.vikingArmy.length;
         const damage = this.saxonArmy[attacker].attack();
@@ -77,5 +75,25 @@ class War {
             this.vikingArmy.splice(attacked,1);
         }
        return result;
+        } else {
+            return "Something went wrong"
+        }
+}
+    vikingAttack() {
+        this.armyAttack("Viking")
+    }
+
+    saxonAttack() {
+        this.armyAttack("Saxon")
+    }
+
+    showStatus() {
+        if (this.saxonArmy.length === 0) {
+            return "Vikings have won the war of the century!" //FOR VALHALLA!
+        } else if (this.vikingArmy.length ===0) {
+            return "Saxons have fought for their lives and survived another day..." //For King Arthus, I guess?
+        } else {
+            return "Vikings and Saxons are still in the thick of battle."
+        }
     }
 }
