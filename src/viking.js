@@ -57,22 +57,20 @@ class War {
         this.saxonArmy.push(saxon);
     }
     armyAttack(attackers,defenders) {
-        const attacker = Math.floor(Math.random()) * this.attackers.length;
-        const defender = Math.floor(Math.random()) * this.defenders.length;
-        const damage = this.attackers[attacker].attack();
-        const result = this.defenders[defender].receiveDamage(damage);
-        if (this.defenders[defender].health <=0) {
-            this.defenders.splice(defender,1);
+        const attacker = Math.floor(Math.random()) * attackers.length;
+        const defender = Math.floor(Math.random()) * defenders.length;
+        const damage = attackers[attacker].attack();
+        const result = defenders[defender].receiveDamage(damage);
+        if (defenders[defender].health <=0) {
+            defenders.splice(defender,1);
         }
         return result;
     }
-    
-    
     vikingAttack() {
-        this.armyAttack(this.vikingArmy,this.saxonArmy);   
+        return this.armyAttack(this.vikingArmy,this.saxonArmy);   
     }
     saxonAttack() {
-        this.armyAttack(this.saxonArmy, this.vikingArmy);
+        return this.armyAttack(this.saxonArmy, this.vikingArmy);
     }
     showStatus() {
         if (this.saxonArmy.length === 0) {
