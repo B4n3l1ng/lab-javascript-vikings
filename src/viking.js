@@ -27,7 +27,7 @@ class Viking extends Soldier {
         }
     }
     battleCry() {
-        return "Odin Owns You All!"
+        return "Odin Owns You All!" //should've been "FOR VALHALLA!" ;)
     }
 }
 
@@ -44,4 +44,38 @@ class Saxon extends Soldier {
 }
 
 // War
-class War {}
+class War {
+    constructor () {
+        this.vikingArmy=[];
+        this.saxonArmy=[];
+    }
+    
+    addViking(viking){
+        this.vikingArmy.push(viking);
+    }
+    addSaxon(saxon) {
+        this.saxonArmy.push(saxon);
+    }
+
+    vikingAttack() {
+        const attacker = Math.floor(Math.random()) * this.vikingArmy.length;
+        const attacked = Math.floor(Math.random()) * this.saxonArmy.length;
+        const damage = this.vikingArmy[attacker].attack();
+        const result = this.saxonArmy[attacked].receiveDamage(damage);
+        if (this.saxonArmy[attacked].health <=0) {
+            this.saxonArmy.splice(attacked,1);
+        }
+       return result;
+    }
+
+    saxonAttack() {
+        const attacker = Math.floor(Math.random()) * this.saxonArmy.length;
+        const attacked = Math.floor(Math.random()) * this.vikingArmy.length;
+        const damage = this.saxonArmy[attacker].attack();
+        const result = this.vikingArmy[attacked].receiveDamage(damage);
+        if (this.vikingArmy[attacked].health <=0) {
+            this.vikingArmy.splice(attacked,1);
+        }
+       return result;
+    }
+}
