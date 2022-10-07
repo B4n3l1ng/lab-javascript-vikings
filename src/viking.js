@@ -56,37 +56,24 @@ class War {
     addSaxon(saxon) {
         this.saxonArmy.push(saxon);
     }
-armyAttack(army) {
-        if (army === "viking") {
-        const attacker = Math.floor(Math.random()) * this.vikingArmy.length;
-        const attacked = Math.floor(Math.random()) * this.saxonArmy.length;
-        const damage = this.vikingArmy[attacker].attack();
-        const result = this.saxonArmy[attacked].receiveDamage(damage);
-        if (this.saxonArmy[attacked].health <=0) {
-            this.saxonArmy.splice(attacked,1);
+    armyAttack(attackers,defenders) {
+        const attacker = Math.floor(Math.random()) * this.attackers.length;
+        const defender = Math.floor(Math.random()) * this.defenders.length;
+        const damage = this.attackers[attacker].attack();
+        const result = this.defenders[defender].receiveDamage(damage);
+        if (this.defenders[defender].health <=0) {
+            this.defenders.splice(defender,1);
         }
-       return result;
-        } else if (army === "saxon") {
-        const attacker = Math.floor(Math.random()) * this.saxonArmy.length;
-        const attacked = Math.floor(Math.random()) * this.vikingArmy.length;
-        const damage = this.saxonArmy[attacker].attack();
-        const result = this.vikingArmy[attacked].receiveDamage(damage);
-        if (this.vikingArmy[attacked].health <=0) {
-            this.vikingArmy.splice(attacked,1);
-        }
-       return result;
-        } else {
-            return "Something went wrong"
-        }
-}
+        return result;
+    }
+    
+    
     vikingAttack() {
-        this.armyAttack("Viking")
+        this.armyAttack(this.vikingArmy,this.saxonArmy);   
     }
-
     saxonAttack() {
-        this.armyAttack("Saxon")
+        this.armyAttack(this.saxonArmy, this.vikingArmy);
     }
-
     showStatus() {
         if (this.saxonArmy.length === 0) {
             return "Vikings have won the war of the century!" //FOR VALHALLA!
